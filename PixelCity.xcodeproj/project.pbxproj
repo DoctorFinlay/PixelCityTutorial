@@ -12,6 +12,7 @@
 		00C41C631FC5DF9A00E584AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00C41C611FC5DF9A00E584AD /* Main.storyboard */; };
 		00C41C651FC5DF9A00E584AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00C41C641FC5DF9A00E584AD /* Assets.xcassets */; };
 		00C41C681FC5DF9A00E584AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00C41C661FC5DF9A00E584AD /* LaunchScreen.storyboard */; };
+		00F01B351FCB33B300C0EE44 /* DroppablePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F01B341FCB33B300C0EE44 /* DroppablePin.swift */; };
 		7D1557F53DEF99F56FCCB358 /* Pods_PixelCity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B4F699E22F2543A2AD09CB /* Pods_PixelCity.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		00C41C641FC5DF9A00E584AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00C41C671FC5DF9A00E584AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00C41C691FC5DF9A00E584AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00F01B341FCB33B300C0EE44 /* DroppablePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppablePin.swift; sourceTree = "<group>"; };
 		57F7D70312CCF964BD0AEC4A /* Pods-PixelCity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PixelCity.release.xcconfig"; path = "Pods/Target Support Files/Pods-PixelCity/Pods-PixelCity.release.xcconfig"; sourceTree = "<group>"; };
 		E7B4F699E22F2543A2AD09CB /* Pods_PixelCity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PixelCity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F56A6B715F01744FD19F4FCD /* Pods-PixelCity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PixelCity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PixelCity/Pods-PixelCity.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 		00C41C701FC5DFBE00E584AD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				00F01B341FCB33B300C0EE44 /* DroppablePin.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00C41C601FC5DF9A00E584AD /* MapVC.swift in Sources */,
+				00F01B351FCB33B300C0EE44 /* DroppablePin.swift in Sources */,
 				00C41C5E1FC5DF9A00E584AD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

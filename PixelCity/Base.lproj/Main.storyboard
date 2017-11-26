@@ -75,7 +75,7 @@
                             <constraint firstItem="OTD-2e-T6J" firstAttribute="top" secondItem="See-pL-hge" secondAttribute="bottom" id="W5i-Kz-84G"/>
                             <constraint firstItem="See-pL-hge" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="e6X-Cl-bsK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ttI-l6-bfl" secondAttribute="trailing" constant="20" id="lq4-OO-7ux"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ttI-l6-bfl" secondAttribute="bottom" constant="20" id="msR-w6-1wR"/>
+                            <constraint firstItem="See-pL-hge" firstAttribute="bottom" secondItem="ttI-l6-bfl" secondAttribute="bottom" constant="19" id="msR-w6-1wR"/>
                             <constraint firstItem="See-pL-hge" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="oJS-5f-1L1"/>
                             <constraint firstItem="See-pL-hge" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uM4-gm-Af9"/>
                             <constraint firstItem="OTD-2e-T6J" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wG6-ar-1eJ"/>
@@ -85,6 +85,8 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="See-pL-hge" id="orc-Cn-9VK"/>
+                        <outlet property="pullUpView" destination="OTD-2e-T6J" id="P6L-ua-YAi"/>
+                        <outlet property="pullUpViewHeightConstraint" destination="UBd-yb-aHt" id="zft-wK-gpg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
