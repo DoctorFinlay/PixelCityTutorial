@@ -24,12 +24,14 @@ class FlickrApiService {
         case server
         case id
         case secret
+        case title
     }
     
     
     //Variables
     public private(set) var imageUrlArray = [String]()
     public private(set) var imageArray = [UIImage]()
+    public private(set) var titlesArray = [String]()
     public private(set) var progressLabel = String()
     
     
@@ -44,14 +46,17 @@ class FlickrApiService {
     func retrieveUrls(forAnnotation annotation: DroppablePin, completion: @escaping (_ status: Bool) -> ()) {
         Alamofire.request(flickrUrl(forApiKey: API_KEY, withAnnotation: annotation, andNumberOfPhotos: 40)).responseJSON { (response) in
             if response.result.error == nil {
+                //Parse response into dictionary
                 guard let data = response.result.value as? Dictionary<String, AnyObject> else { return }
+                //Get photo image urls and parse into array
                 let photosDict = data[jsonKeys.photos.rawValue] as! Dictionary<String, AnyObject>
                 let photosDictArray = photosDict[jsonKeys.photo.rawValue] as! [Dictionary<String, AnyObject>]
-                
-                
                 for photo in photosDictArray {
                     let postUrl = "https://farm\(photo[jsonKeys.farm.rawValue]!).staticflickr.com/\(photo[jsonKeys.server.rawValue]!)/\(photo[jsonKeys.id.rawValue]!)_\(photo[jsonKeys.secret.rawValue]!)_h_d.jpg"
                     self.imageUrlArray.append(postUrl)
+               //Get image titles and append to array
+                    let title = photo[jsonKeys.title.rawValue]! as! String
+                    self.titlesArray.append(title)
                 }
                 completion(true)
             } else {
@@ -92,6 +97,7 @@ class FlickrApiService {
     func emptyArrays() {
         self.imageArray.removeAll()
         self.imageUrlArray.removeAll()
+        self.titlesArray.removeAll()
     }
     
 }

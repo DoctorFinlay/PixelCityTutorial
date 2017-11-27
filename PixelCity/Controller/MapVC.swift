@@ -258,7 +258,7 @@ extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC") as? PopVC else { return }
-        popVC.initData(forImage: FlickrApiService.instance.imageArray[indexPath.row])
+        popVC.initData(forImage: FlickrApiService.instance.imageArray[indexPath.row], forTitle: FlickrApiService.instance.titlesArray[indexPath.row])
         present(popVC, animated: true, completion: nil)
     }
 }
@@ -272,7 +272,7 @@ extension MapVC: UIViewControllerPreviewingDelegate {
         guard let indexPath = collectionView?.indexPathForItem(at: location), let cell = collectionView?.cellForItem(at: indexPath) else { return nil }
         guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC") as? PopVC else { return nil }
         
-        popVC.initData(forImage: FlickrApiService.instance.imageArray[indexPath.row])
+        popVC.initData(forImage: FlickrApiService.instance.imageArray[indexPath.row], forTitle: FlickrApiService.instance.titlesArray[indexPath.row])
         previewingContext.sourceRect = cell.contentView.frame
         return popVC
     }

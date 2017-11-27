@@ -11,6 +11,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <array key="AvenirNext.ttc">
+            <string>AvenirNext-Bold</string>
             <string>AvenirNext-DemiBold</string>
         </array>
     </customFonts>
@@ -101,7 +102,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="coR-iU-gpi">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="coR-iU-gpi">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHW-bH-XCT">
@@ -122,20 +123,43 @@
                                     <constraint firstItem="UdA-oD-fOm" firstAttribute="centerY" secondItem="SHW-bH-XCT" secondAttribute="centerY" id="wON-uG-1lQ"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJI-se-DgD">
+                                <rect key="frame" x="0.0" y="35" width="375" height="25"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4qr-b7-F9u">
+                                        <rect key="frame" x="15" y="0.0" width="360" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="-1" height="0.0"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="4qr-b7-F9u" secondAttribute="trailing" id="0xd-hB-iEc"/>
+                                    <constraint firstAttribute="height" constant="25" id="7ue-dY-ENM"/>
+                                    <constraint firstItem="4qr-b7-F9u" firstAttribute="centerY" secondItem="FJI-se-DgD" secondAttribute="centerY" id="UrK-Qb-dVX"/>
+                                    <constraint firstItem="4qr-b7-F9u" firstAttribute="leading" secondItem="FJI-se-DgD" secondAttribute="leading" constant="15" id="m64-Jb-NfW"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="uWd-TV-1hJ" firstAttribute="trailing" secondItem="coR-iU-gpi" secondAttribute="trailing" id="2MF-Rx-Q4C"/>
+                            <constraint firstItem="FJI-se-DgD" firstAttribute="top" secondItem="uWd-TV-1hJ" secondAttribute="top" constant="15" id="46h-Ta-fik"/>
                             <constraint firstItem="coR-iU-gpi" firstAttribute="bottom" secondItem="ja2-xs-Ens" secondAttribute="bottom" id="Eca-ca-vD3"/>
                             <constraint firstItem="uWd-TV-1hJ" firstAttribute="bottom" secondItem="SHW-bH-XCT" secondAttribute="bottom" constant="20" id="VMi-EV-4VY"/>
                             <constraint firstItem="SHW-bH-XCT" firstAttribute="centerX" secondItem="ja2-xs-Ens" secondAttribute="centerX" id="XvU-Bx-gaE"/>
+                            <constraint firstItem="FJI-se-DgD" firstAttribute="leading" secondItem="uWd-TV-1hJ" secondAttribute="leading" id="Y19-WM-Rrj"/>
                             <constraint firstItem="coR-iU-gpi" firstAttribute="leading" secondItem="uWd-TV-1hJ" secondAttribute="leading" id="cHN-f6-ncV"/>
                             <constraint firstItem="coR-iU-gpi" firstAttribute="top" secondItem="ja2-xs-Ens" secondAttribute="top" id="edj-uM-Me3"/>
+                            <constraint firstItem="FJI-se-DgD" firstAttribute="width" secondItem="ja2-xs-Ens" secondAttribute="width" id="nE1-IX-EC0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uWd-TV-1hJ"/>
                     </view>
                     <connections>
                         <outlet property="popImageView" destination="coR-iU-gpi" id="1f8-E0-TTu"/>
+                        <outlet property="titleLbl" destination="4qr-b7-F9u" id="vSh-YV-Hhl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qca-gY-d5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
