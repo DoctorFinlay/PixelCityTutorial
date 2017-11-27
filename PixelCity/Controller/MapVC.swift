@@ -51,6 +51,8 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateProgressLbl), name: NOTIF_UPDATE_PROGRESS_LBL, object: nil)
         
+        //Set up sourceRect for 3d touch
+        registerForPreviewing(with: self, sourceView: collectionView!)
     }
     
     func addDoubleTap() {
@@ -259,11 +261,29 @@ extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
         popVC.initData(forImage: FlickrApiService.instance.imageArray[indexPath.row])
         present(popVC, animated: true, completion: nil)
     }
-    
 }
 
 
-
+extension MapVC: UIViewControllerPreviewingDelegate {
+    //3d touch
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        //Pop to next VC
+        guard let indexPath = collectionView?.indexPathForItem(at: location), let cell = collectionView?.cellForItem(at: indexPath) else { return nil }
+        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC") as? PopVC else { return nil }
+        
+        popVC.initData(forImage: FlickrApiService.instance.imageArray[indexPath.row])
+        previewingContext.sourceRect = cell.contentView.frame
+        return popVC
+    }
+    
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        //Peek
+        show(viewControllerToCommit, sender: self)
+    }
+    
+}
 
 
 
