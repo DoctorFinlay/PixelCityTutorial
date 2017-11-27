@@ -93,6 +93,55 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
         </scene>
+        <!--PopVC-->
+        <scene sceneID="vrt-Fw-k9T">
+            <objects>
+                <viewController storyboardIdentifier="PopVC" id="FRk-ec-b8F" customClass="PopVC" customModule="PixelCity" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ja2-xs-Ens">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="coR-iU-gpi">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHW-bH-XCT">
+                                <rect key="frame" x="87" y="622" width="200" height="25"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double-tap to dismiss" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UdA-oD-fOm">
+                                        <rect key="frame" x="13.5" y="0.5" width="173" height="24"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="UdA-oD-fOm" firstAttribute="centerX" secondItem="SHW-bH-XCT" secondAttribute="centerX" id="0fO-At-g2b"/>
+                                    <constraint firstAttribute="height" constant="25" id="IXj-MO-BoP"/>
+                                    <constraint firstAttribute="width" constant="200" id="M68-YK-y2V"/>
+                                    <constraint firstItem="UdA-oD-fOm" firstAttribute="centerY" secondItem="SHW-bH-XCT" secondAttribute="centerY" id="wON-uG-1lQ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uWd-TV-1hJ" firstAttribute="trailing" secondItem="coR-iU-gpi" secondAttribute="trailing" id="2MF-Rx-Q4C"/>
+                            <constraint firstItem="coR-iU-gpi" firstAttribute="bottom" secondItem="ja2-xs-Ens" secondAttribute="bottom" id="Eca-ca-vD3"/>
+                            <constraint firstItem="uWd-TV-1hJ" firstAttribute="bottom" secondItem="SHW-bH-XCT" secondAttribute="bottom" constant="20" id="VMi-EV-4VY"/>
+                            <constraint firstItem="SHW-bH-XCT" firstAttribute="centerX" secondItem="ja2-xs-Ens" secondAttribute="centerX" id="XvU-Bx-gaE"/>
+                            <constraint firstItem="coR-iU-gpi" firstAttribute="leading" secondItem="uWd-TV-1hJ" secondAttribute="leading" id="cHN-f6-ncV"/>
+                            <constraint firstItem="coR-iU-gpi" firstAttribute="top" secondItem="ja2-xs-Ens" secondAttribute="top" id="edj-uM-Me3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="uWd-TV-1hJ"/>
+                    </view>
+                    <connections>
+                        <outlet property="popImageView" destination="coR-iU-gpi" id="1f8-E0-TTu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qca-gY-d5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="853.60000000000002" y="130.88455772113943"/>
+        </scene>
     </scenes>
     <resources>
         <image name="locationButton" width="67" height="67"/>
