@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Alamofire
+import AlamofireImage
 
 
 class MapVC: UIViewController, UIGestureRecognizerDelegate {
@@ -27,6 +29,9 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     
     var spinner: UIActivityIndicatorView?
     var progressLbl: UILabel?
+    var collectionView: UICollectionView?
+    var flowLayout = UICollectionViewFlowLayout() //As we are adding the collection view programmatically, we need a flow layout
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +40,16 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         locationManager.delegate = self
         configureLocationServices()
         addDoubleTap()
+        
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
+        collectionView?.register(PhotoCell.self, forCellWithReuseIdentifier: "photoCell")
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        collectionView?.backgroundColor = UIColor.white
+        
+        pullUpView.addSubview(collectionView!)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateProgressLbl), name: NOTIF_UPDATE_PROGRESS_LBL, object: nil)
         
     }
     
@@ -61,7 +76,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc func animateViewDown() {
-        print("I ran - view should go down")
+        FlickrApiService.instance.cancelAllSessions()
         pullUpViewHeightConstraint.constant = 0
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded() //Redraw everything to show what has changed
@@ -75,7 +90,31 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         spinner?.activityIndicatorViewStyle = .whiteLarge
         spinner?.color = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
         spinner?.startAnimating()
-        pullUpView.addSubview(spinner!)
+        collectionView?.addSubview(spinner!)
+    }
+    
+    
+    func removeSpinner() {
+        if spinner != nil {
+            spinner?.removeFromSuperview()
+        }
+    }
+    
+    
+    func addProgressLbl() {
+        progressLbl = UILabel()
+        progressLbl?.frame = CGRect(x: (screenSize.width/2) - 120, y: 175, width: 240, height: 40)
+        progressLbl?.font = UIFont(name: "Avenir Next", size: 18)
+        progressLbl?.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        progressLbl?.textAlignment = .center
+        collectionView?.addSubview(progressLbl!)
+    }
+    
+    
+    func removeProgressLbl() {
+        if progressLbl != nil {
+            progressLbl?.removeFromSuperview()
+        }
     }
     
     @IBAction func centerMapBtnWasPressed(_ sender: Any) {
@@ -114,10 +153,20 @@ extension MapVC: MKMapViewDelegate {
     
     
     @objc func dropPin(sender: UITapGestureRecognizer) {
+        FlickrApiService.instance.cancelAllSessions()
         removePin()
+        removeSpinner()
+        removeProgressLbl()
+        
+        FlickrApiService.instance.emptyArrays()
+        
+        collectionView?.reloadData()
+        
         animateViewUp()
         addSwipe()
         addSpinner()
+        addProgressLbl()
+        
         
         //Create a touch point
         let touchPoint = sender.location(in: mapView)  //this creates coordinates for the touch point on the screen , not GPS coordinate!
@@ -128,8 +177,29 @@ extension MapVC: MKMapViewDelegate {
         
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
+        
+        FlickrApiService.instance.retrieveUrls(forAnnotation: annotation) { (success) in
+            if success {
+                FlickrApiService.instance.retrieveImages(completion: { (success) in
+                    //Hide the spinner
+                    self.removeSpinner()
+                    //Hide progress label
+                    self.removeProgressLbl()
+                    //Reload collectionview
+                    self.collectionView?.reloadData()
+                })
+            } else {
+                print("Ruh-roh!")
+            }
+        }
     }
     
+    
+    @objc func updateProgressLbl() {
+        if self.progressLbl != nil {
+            self.progressLbl!.text = FlickrApiService.instance.progressLabel
+        }
+    }
     
     
     func removePin() {
@@ -137,6 +207,8 @@ extension MapVC: MKMapViewDelegate {
             mapView.removeAnnotation(annotation)
         }
     }
+    
+    
     
 }
 
@@ -156,3 +228,39 @@ extension MapVC: CLLocationManagerDelegate {
         centerMapOnUserLocation()
     }
 }
+
+
+
+extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        //We need the number of items in the imageArray
+        return FlickrApiService.instance.imageArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCell else { return UICollectionViewCell() }
+        let imageFromIndex = FlickrApiService.instance.imageArray[indexPath.row]
+        let imageView = UIImageView(image: imageFromIndex)
+        cell.addSubview(imageView)
+        
+        
+        return cell
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
