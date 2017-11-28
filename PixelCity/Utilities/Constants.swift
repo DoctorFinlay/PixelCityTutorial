@@ -10,7 +10,7 @@ import Foundation
 
 
 //API
-let API_KEY = "850bcffc1e1c06ed9fcce5e0676fb255"
+let API_KEY = "" //Get a free API key from flickr.com!!
 let BASE_URL = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key="
 
 //Notifications
